@@ -6,7 +6,7 @@ add_library(exp
 
 enable_testing()
 
-add_executable(TestCondition condition.test.c)
+add_executable(TestCondition condition.test.cpp)
 target_link_libraries(TestCondition exp gtest_main)
 
 include(GoogleTest)
