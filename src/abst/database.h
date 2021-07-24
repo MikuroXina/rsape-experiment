@@ -11,6 +11,12 @@ typedef struct Repository_ {
       *_query_reservations)(struct Repository_ *self, Condition const *cond);
 } Repository;
 
+typedef struct Database_ {
+  bool (*_register_reservation)(struct Database_ *self, Reservation const *r);
+  bool (*_stale_reservation)(struct Database_ *self, char const *id);
+  bool (*_done_reservation)(struct Database_ *self, char const *id);
+} Database;
+
 static inline Reservation *repository_get_by_id(Repository *self,
     char const *id) {
   return self->_get_by_id(self, id);
@@ -20,12 +26,6 @@ static inline Reservation **repository_query_reservations(Repository *self,
     Condition const *cond) {
   return self->_query_reservations(self, cond);
 }
-
-typedef struct Database_ {
-  bool (*_register_reservation)(struct Database_ *self, Reservation const *r);
-  bool (*_stale_reservation)(struct Database_ *self, char const *id);
-  bool (*_done_reservation)(struct Database_ *self, char const *id);
-} Database;
 
 static inline bool database_register_reservation(Database *self,
     Reservation const *r) {
