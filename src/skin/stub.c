@@ -28,10 +28,10 @@ static Reservation *stub_get_by_id(Repository *r, char const *id) {
 static Reservation **stub_query_reservations(Repository *r,
     Condition const *cond) {
   StubRepository *s = (StubRepository *)r;
-  s->query_buf = calloc(s->reservations_len, sizeof(Reservation *));
   if (s->query_buf != NULL) {
     free(s->query_buf);
   }
+  s->query_buf = calloc(s->reservations_len, sizeof(Reservation *));
   size_t buf_idx = 0;
   for (size_t i = 0; i < s->reservations_len; ++i) {
     if (is_matched(cond, s->reservations[i])) {
