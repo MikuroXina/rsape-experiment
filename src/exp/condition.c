@@ -46,8 +46,8 @@ Condition *cond_earlier_than(Instant t) {
 
 typedef struct {
   Condition cond;
-  HourMiniute from;
-  HourMiniute to;
+  HourMinute from;
+  HourMinute to;
 } ConditionTimeOfDay;
 
 static bool in_time_of_day_matcher(Condition const *self,
@@ -63,7 +63,7 @@ static bool in_time_of_day_matcher(Condition const *self,
          (from_miniutes < end_minutes && start_minutes < to_miniutes);
 }
 
-Condition *cond_in_time_of_day(HourMiniute from, HourMiniute to) {
+Condition *cond_in_time_of_day(HourMinute from, HourMinute to) {
   ConditionTimeOfDay *c = malloc(sizeof(ConditionTimeOfDay));
   c->cond.matcher = in_time_of_day_matcher;
   c->cond.destructor = do_nothing_destructor;

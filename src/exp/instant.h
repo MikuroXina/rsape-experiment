@@ -45,10 +45,10 @@ static inline Instant instant_add(Instant l, Duration r) {
   return i;
 }
 
-typedef struct HourMiniute_ {
+typedef struct HourMinute_ {
   unsigned hour;
   unsigned miniute;
-} HourMiniute;
+} HourMinute;
 
 typedef enum DayOfWeek_ {
   Sunday,
