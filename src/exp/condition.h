@@ -9,7 +9,7 @@ typedef struct Condition_ Condition;
 
 Condition *cond_later_than(Instant t);
 Condition *cond_earlier_than(Instant t);
-Condition *cond_in_time_of_day(Hour from, Hour to);
+Condition *cond_in_time_of_day(HourMiniute from, HourMiniute to);
 Condition *cond_is_day_of_week(DayOfWeek day);
 Condition *cond_all(void);
 Condition *cond_or(Condition *l, Condition *r);
