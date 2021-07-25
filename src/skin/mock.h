@@ -17,6 +17,3 @@ typedef struct Reservation_ Reservation;
 
 Database *new_mock_database(void);
 void drop_mock_database(Database *);
-Reservation const *active_reservations(Database const *);
-Reservation const *stale_reservations(Database const *);
-Reservation const *done_reservations(Database const *);
