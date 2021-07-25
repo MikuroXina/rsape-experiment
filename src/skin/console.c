@@ -21,16 +21,16 @@ static Instant input_instant() {
   struct tm inputting;
   localtime_r(&now, &inputting);
 
-  printf("年 [%d]: ", inputting.tm_year);
+  printf("年 [%d]: ", inputting.tm_year + 1900);
   int year = 0;
   if (scanf("%d", &year)) {
-    inputting.tm_year = year;
+    inputting.tm_year = year - 1900;
   }
 
-  printf("月 [%d]: ", inputting.tm_mon);
+  printf("月 [%d]: ", inputting.tm_mon + 1);
   int month = 0;
   if (scanf("%d", &month)) {
-    inputting.tm_mon = month;
+    inputting.tm_mon = month - 1;
   }
 
   printf("日 [%d]: ", inputting.tm_mday);
