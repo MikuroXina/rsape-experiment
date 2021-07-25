@@ -17,8 +17,7 @@ typedef struct {
 } ConsoleInputController;
 
 static Instant input_instant() {
-  time_t now;
-  time(&now);
+  time_t now = time(NULL);
   struct tm inputting;
   localtime_r(&now, &inputting);
 
