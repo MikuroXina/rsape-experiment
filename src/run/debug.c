@@ -1,6 +1,7 @@
 #include "./debug.h"
 
 #include <stdio.h>
+#include <time.h>
 
 #include "../exp/reservation.h"
 #include "../play/play.h"
@@ -19,7 +20,7 @@ void debug_run() {
   Database *db = new_mock_database();
   ConsoleViewController *view = new_console_view_controller();
   InputController *input = new_console_input_controller();
-  Clock *clock = new_mock_clock(instant_from_time(100));
+  Clock *clock = new_mock_clock(instant_from_time(time(NULL)));
   Config *config = new_mock_config(3, duration_from_time(108000));
 
   while (true) {
