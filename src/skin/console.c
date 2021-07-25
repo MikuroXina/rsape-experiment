@@ -3,11 +3,31 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 #include "../abst/controller.h"
 #include "../exp/condition.h"
 #include "../exp/reservation.h"
+
+static int input_num() {
+  do {
+    char buf[256] = {0};
+    fgets(buf, 256, stdin);
+    if (buf[0] == '\n') {
+      return -1;
+    }
+    int num = 0;
+    if (sscanf(buf, "%d", &num) != 0) {
+      return num;
+    }
+    if (strchr(buf, '\n') == NULL) {
+      while (getchar() != '\n') {
+      }
+      getchar();
+    }
+  } while (true);
+}
 
 typedef struct {
   InputController con;
@@ -22,32 +42,32 @@ static Instant input_instant() {
   localtime_r(&now, &inputting);
 
   printf("年 [%d]: ", inputting.tm_year + 1900);
-  int year = 0;
-  if (scanf("%d", &year)) {
+  int year = input_num();
+  if (0 <= year) {
     inputting.tm_year = year - 1900;
   }
 
   printf("月 [%d]: ", inputting.tm_mon + 1);
-  int month = 0;
-  if (scanf("%d", &month)) {
+  int month = input_num();
+  if (0 <= month) {
     inputting.tm_mon = month - 1;
   }
 
   printf("日 [%d]: ", inputting.tm_mday);
-  int day = 0;
-  if (scanf("%d", &day)) {
+  int day = input_num();
+  if (0 <= day) {
     inputting.tm_mday = day;
   }
 
   printf("時 [%d]: ", inputting.tm_hour);
-  int hour = 0;
-  if (scanf("%d", &hour)) {
+  int hour = input_num();
+  if (0 <= hour) {
     inputting.tm_hour = hour;
   }
 
   printf("分 [%d]: ", inputting.tm_min);
-  int minute = 0;
-  if (scanf("%d", &minute)) {
+  int minute = input_num();
+  if (0 <= minute) {
     inputting.tm_min = minute;
   }
 

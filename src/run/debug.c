@@ -32,6 +32,7 @@ void debug_run() {
     puts("実行する Play の数字を入力して下さい");
     int select = 0;
     scanf("%d", &select);
+    getchar();
     if (select == 0) {
       break;
     }
