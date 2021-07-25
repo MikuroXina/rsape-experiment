@@ -31,6 +31,4 @@ void register_reservation(Repository *repo,
       view->error_on_register("failed to register th reservation");
     }
   }
-
-  drop_condition(cond);
 }

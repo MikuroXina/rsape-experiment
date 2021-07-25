@@ -10,5 +10,4 @@ void confirm_reservation(Repository *repo,
   Condition *cond = input_controller_input_condition(input);
   Reservation **reservations = repository_query_reservations(repo, cond);
   view->show_reservations(reservations);
-  drop_condition(cond);
 }
