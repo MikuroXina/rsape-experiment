@@ -225,9 +225,8 @@ static void show_reservations(Reservation **found) {
 
   printf("%ld 件の予約が見つかりました\n", count);
   puts(
-      "                                     ID |   状態 |                "
-      "開始時刻 |                終了時刻 |                             受診者 "
-      "ID");
+      " ID                                   | 状態   | 開始時刻             "
+      "    | 終了時刻                 | 受診者 ID");
   for (Reservation **it = found; *it != NULL; ++it) {
     Reservation *r = *it;
     char const *state_mes = "";
@@ -248,11 +247,8 @@ static void show_reservations(Reservation **found) {
     ctime_r(&start, start_buf);
     ctime_r(&end, end_buf);
     start_buf[24] = end_buf[24] = 0;
-    printf(
-        "                                    %s |      %s |                    "
-        "   %s |                       %s |                                    "
-        " %s\n",
-        r->id, state_mes, start_buf, end_buf, r->visitor_id);
+    printf(" %s | %s | %s | %s | %s\n", r->id, state_mes, start_buf, end_buf,
+        r->visitor_id);
   }
 }
 
