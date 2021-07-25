@@ -31,7 +31,7 @@ static Reservation **stub_query_reservations(Repository *r,
   if (s->query_buf != NULL) {
     free(s->query_buf);
   }
-  s->query_buf = calloc(s->reservations_len, sizeof(Reservation *));
+  s->query_buf = calloc(s->reservations_len + 1, sizeof(Reservation *));
   size_t buf_idx = 0;
   for (size_t i = 0; i < s->reservations_len; ++i) {
     if (is_matched(cond, s->reservations[i])) {
