@@ -5,7 +5,6 @@
 #include <time.h>
 
 static char *gen_uuid_v4() {
-  srand((unsigned)time(NULL));
   unsigned char rands[16] = {0};
   for (int i = 0; i < 16; ++i) {
     rands[i] = (unsigned char)rand();
