@@ -36,13 +36,13 @@ typedef struct {
   Duration cancel_limit;
 } MockConfig;
 
-static int mock_config_reservation_limit(Config *c) {
-  MockConfig *m = (MockConfig *)c;
+static int mock_config_reservation_limit(Config const *c) {
+  MockConfig const *m = (MockConfig const *)c;
   return m->reservation_limit;
 }
 
-static Duration mock_config_cancel_limit(Config *c) {
-  MockConfig *m = (MockConfig *)c;
+static Duration mock_config_cancel_limit(Config const *c) {
+  MockConfig const *m = (MockConfig const *)c;
   return m->cancel_limit;
 }
 
@@ -67,9 +67,9 @@ typedef struct {
 
 static ReservationVec *new_reservation_vec() {
   ReservationVec *vec = malloc(sizeof(ReservationVec));
-  vec->p = malloc(sizeof(Reservation));
+  vec->p = calloc(2, sizeof(Reservation));
   vec->len = 0;
-  vec->cap = 1;
+  vec->cap = 2;
   return vec;
 }
 
@@ -126,7 +126,7 @@ static bool mock_stale_reservation(Database *d, char const *id) {
   MockDatabase *m = (MockDatabase *)d;
   Reservation const *found = find_id_reservation_vec(m->active, id);
   if (found == NULL) {
-    return true;
+    return false;
   }
   push_reservation_vec(m->stale, *found);
   remove_reservation_vec(m->active, (size_t)(found - m->active->p));
@@ -137,7 +137,7 @@ static bool mock_done_reservation(Database *d, char const *id) {
   MockDatabase *m = (MockDatabase *)d;
   Reservation const *found = find_id_reservation_vec(m->active, id);
   if (found == NULL) {
-    return true;
+    return false;
   }
   push_reservation_vec(m->done, *found);
   remove_reservation_vec(m->active, (size_t)(found - m->active->p));
@@ -161,19 +161,4 @@ void drop_mock_database(Database *d) {
   drop_reservation_vec(m->stale);
   drop_reservation_vec(m->active);
   free(m);
-}
-
-Reservation const *active_reservations(Database const *d) {
-  MockDatabase const *m = (MockDatabase const *)d;
-  return m->active->p;
-}
-
-Reservation const *stale_reservations(Database const *d) {
-  MockDatabase const *m = (MockDatabase const *)d;
-  return m->stale->p;
-}
-
-Reservation const *done_reservations(Database const *d) {
-  MockDatabase const *m = (MockDatabase const *)d;
-  return m->done->p;
 }
